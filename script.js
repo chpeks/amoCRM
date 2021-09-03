@@ -15,22 +15,20 @@ function getContacts() {
             page: page
         }
     }).done(function(data) {
-        for (let i = 0; data['contacts']['leads'] === ""; i++) {
-            $.ajax({
-                url: conditionalTaskCreation,
-                method: 'POST',
-                record: {
-                    text: text,
-                    complete_till: complete_till,
-                    entity_id: data['contacts']['id']
+        if (!!data) {
+            for (let i = 0; data['contacts']['leads'] === ""; i++) {
+                $.ajax({
+                    url: conditionalTaskCreation,
+                    method: 'POST',
+                    record: {
+                        text: text,
+                        complete_till: complete_till,
+                        entity_id: data['contacts']['id'],
+                        entity_type: 'leads'
 
-                }
-            })
-        }
-
-        if (!!data['concat']['leads']) {
-            console.log(data)
-
+                    }
+                })
+            }
         } else {
             console.log('Контактов нет');
             return false;
