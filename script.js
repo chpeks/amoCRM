@@ -16,7 +16,7 @@ function getContacts() {
         }
     }).done(function(data) {
         if (!!data) {
-            for (let i = 0; data['contacts']['leads'] === ""; i++) {
+            while (data['contacts']['leads'] === ""){
                 $.ajax({
                     url: conditionalTaskCreation,
                     method: 'POST',
